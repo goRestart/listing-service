@@ -1,0 +1,14 @@
+{
+	"name": "template-service",
+	"scripts": {},
+	"env": {},
+	"formation": {},
+	"addons": [
+	],
+	"environments": {},
+	"buildpacks": [
+		{
+			"url": "https://github.com/vapor/heroku-buildpack"
+		}
+	]
+}
