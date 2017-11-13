@@ -1,4 +1,5 @@
 import FluentProvider
+import PostgreSQLProvider
 
 extension Config {
   public func setup() throws {
@@ -12,6 +13,7 @@ extension Config {
   
   private func setupProviders() throws {
     try addProvider(FluentProvider.Provider.self)
+    try addProvider(PostgreSQLProvider.Provider.self)
   }
   
   // MARK: - Preparations
