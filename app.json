@@ -1,9 +1,12 @@
 {
-	"name": "template-service",
+	"name": "listing-service",
 	"scripts": {},
 	"env": {},
 	"formation": {},
 	"addons": [
+		{
+			"plan": "heroku-postgresql"
+		}
 	],
 	"environments": {},
 	"buildpacks": [
