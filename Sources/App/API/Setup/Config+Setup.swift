@@ -19,6 +19,12 @@ extension Config {
   // MARK: - Preparations
   
   private func setupPreparations() throws {
-    preparations = []
+    preparations = [
+      ImageDiskModel.self,
+      PriceDiskModel.self,
+      ProductDiskModel.self,
+      
+      Pivot<ProductDiskModel, ImageDiskModel>.self
+    ]
   }
 }
