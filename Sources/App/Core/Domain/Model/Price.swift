@@ -1,6 +1,6 @@
 import Foundation
 
 struct Price {
-  let price: Decimal
+  let value: Double
   let locale: Locale
 }
