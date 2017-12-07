@@ -13,15 +13,16 @@ let package = Package(
     .package(url: "https://github.com/vapor/fluent-provider.git", .upToNextMajor(from: "1.3.0")),
     .package(url: "https://github.com/vapor-community/postgresql-provider.git", .upToNextMajor(from: "2.1.0")),
     .package(url: "https://github.com/goRestart/core-service.git", .branch("develop")),
-    .package(url: "https://github.com/goRestart/game-service-api.git", .branch("develop"))
-    ],
+    .package(url: "https://github.com/goRestart/game-service-api.git", .branch("develop")),
+    .package(url: "https://github.com/goRestart/image-service-api.git", .branch("develop"))
+  ],
   targets: [
-    .target(name: "App", dependencies: ["Vapor", "FluentProvider", "PostgreSQLProvider", "CoreService", "game-service-api"],
+    .target(name: "App", dependencies: ["Vapor", "FluentProvider", "PostgreSQLProvider", "CoreService", "game-service-api", "image-service-api"],
             exclude: [
               "Config",
               "Public",
               "Resources",
-              ]),
+            ]),
     .target(name: "Run", dependencies: ["App"])
   ]
 )
