@@ -1,6 +1,8 @@
+import Foundation
+import Fluent
 import CoreService
 import game_service_api
-import Foundation
+import image_service_api
 
 private let defaultCurrencyCode = "EUR"
 
@@ -8,12 +10,15 @@ struct AddProductTask {
   
   private let getGameById: GetGameById
   private let getGameConsoleById: GetGameConsoleById
+  private let getImagesByIds: GetImagesByIds
   
   init(getGameById: GetGameById,
-       getGameConsoleById: GetGameConsoleById)
+       getGameConsoleById: GetGameConsoleById,
+       getImagesByIds: GetImagesByIds)
   {
     self.getGameById = getGameById
     self.getGameConsoleById = getGameConsoleById
+    self.getImagesByIds = getImagesByIds
   }
   
   func execute(with request: AddProductRequest) throws -> ProductDiskModel {
@@ -24,8 +29,8 @@ struct AddProductTask {
     guard let _ = try getGameConsoleById.execute(with: Identifier(request.gameConsoleId)) else {
       throw ProductError.invalidGameConsoleId
     }
-    
-    return try TransactionHandler.database!.transaction { connection in
+ 
+    let product: ProductDiskModel = try TransactionHandler.database!.transaction { connection in
       let price = PriceDiskModel(
         value: request.price.value,
         locale: request.price.locale.currencyCode ?? defaultCurrencyCode
@@ -39,6 +44,23 @@ struct AddProductTask {
       )
       try product.makeQuery(connection).save()
       return product
+    }
+    try add(images: request.imageIds, to: product)
+    
+    return product
+  }
+  
+  private func add(images: [String], to product: ProductDiskModel) throws {
+    let imageIds = images.map { CoreService.Identifier<image_service_api.Image>($0) }
+    let images = try getImagesByIds.execute(with: imageIds)
+    
+    try images?.forEach { element in
+      let image = ImageDiskModel(
+        identifier: Fluent.Identifier(element.id.value),
+        url: element.url
+      )
+      try image.save()
+      try product.images.add(image)
     }
   }
 }

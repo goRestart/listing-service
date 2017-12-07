@@ -1,6 +1,4 @@
 import Foundation
-import CoreService
-import game_service_api
 
 struct ProductDiskDataSource: ProductDataSource {
   
