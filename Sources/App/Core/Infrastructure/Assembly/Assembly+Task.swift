@@ -1,11 +1,13 @@
 import CoreService
 import game_service_api
+import image_service_api
 
 extension Assembly {
   var addProductTask: AddProductTask {
     return AddProductTask(
       getGameById: getGameById,
-      getGameConsoleById: getGameConsoleById
+      getGameConsoleById: getGameConsoleById,
+      getImagesByIds: getImagesByIds
     )
   }
   
@@ -15,5 +17,9 @@ extension Assembly {
   
   private var getGameConsoleById: GetGameConsoleById {
     return GetGameConsoleById()
+  }
+  
+  private var getImagesByIds: GetImagesByIds {
+    return GetImagesByIds()
   }
 }
