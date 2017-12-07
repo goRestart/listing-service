@@ -44,7 +44,7 @@ extension ProductDiskModel {
     return try! parent(id: priceId).get()!
   }
   
-  var imageIds: Siblings<ProductDiskModel, ImageDiskModel, Pivot<ProductDiskModel, ImageDiskModel>> {
+  var images: Siblings<ProductDiskModel, ImageDiskModel, Pivot<ProductDiskModel, ImageDiskModel>> {
     return siblings()
   }
 }
