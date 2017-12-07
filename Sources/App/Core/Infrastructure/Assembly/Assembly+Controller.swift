@@ -8,6 +8,8 @@ extension Assembly {
   }
   
   private var productController: ProductController {
-    return ProductController()
+    return ProductController(
+      addProduct: addProduct
+    )
   }
 }
