@@ -1,8 +1,8 @@
 import Foundation
 import CoreService
 
-struct Product {
-  let identifier: Identifier<Product>
+struct Product: Codable {
+  let id: Identifier<Product>
   let title: String
   let description: String
   let price: Price

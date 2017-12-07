@@ -1,6 +1,6 @@
 import Foundation
 
-struct Price {
+struct Price: Codable {
   let value: Double
   let locale: Locale
 }
