@@ -9,13 +9,14 @@ let package = Package(
     .executable(name: "Run", targets: ["Run"])
   ],
   dependencies: [
-    .package(url: "https://github.com/vapor/vapor.git", .upToNextMajor(from: "2.3.0")),
+    .package(url: "https://github.com/vapor/vapor.git", .upToNextMajor(from: "2.4.0")),
     .package(url: "https://github.com/vapor/fluent-provider.git", .upToNextMajor(from: "1.3.0")),
     .package(url: "https://github.com/vapor-community/postgresql-provider.git", .upToNextMajor(from: "2.1.0")),
-    .package(url: "https://github.com/goRestart/core-service.git", .branch("develop"))
+    .package(url: "https://github.com/goRestart/core-service.git", .branch("develop")),
+    .package(url: "https://github.com/goRestart/game-service-api.git", .branch("develop"))
     ],
   targets: [
-    .target(name: "App", dependencies: ["Vapor", "FluentProvider", "PostgreSQLProvider", "CoreService"],
+    .target(name: "App", dependencies: ["Vapor", "FluentProvider", "PostgreSQLProvider", "CoreService", "game-service-api"],
             exclude: [
               "Config",
               "Public",
