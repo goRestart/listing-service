@@ -1,5 +1,6 @@
 import FluentProvider
 import PostgreSQLProvider
+import CoreService
 
 extension Config {
   public func setup() throws {
@@ -19,6 +20,14 @@ extension Config {
   // MARK: - Preparations
   
   private func setupPreparations() throws {
-    preparations = []
+    preparations = [
+      TransactionHandler.self,
+      
+      ImageDiskModel.self,
+      PriceDiskModel.self,
+      ProductDiskModel.self,
+      
+      Pivot<ProductDiskModel, ImageDiskModel>.self
+    ]
   }
 }

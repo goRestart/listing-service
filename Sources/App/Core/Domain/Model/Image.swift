@@ -1,6 +1,7 @@
+import Foundation
 import CoreService
 
-struct Image {
-  let identifier: Identifier<Image>
+struct Image: Codable {
+  let id: Identifier<Image>
   let url: String
 }
