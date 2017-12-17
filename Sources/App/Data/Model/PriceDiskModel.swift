@@ -45,8 +45,8 @@ extension PriceDiskModel: Preparation {
   static func prepare(_ database: Database) throws {
     try database.create(PriceDiskModel.self) { builder in
       builder.id()
-      builder.double(Keys.value, optional: false)
-      builder.string(Keys.locale, optional: false)
+      builder.double(Keys.value)
+      builder.string(Keys.locale)
     }
   }
   
