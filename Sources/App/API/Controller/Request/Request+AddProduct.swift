@@ -39,6 +39,7 @@ extension Request {
     let images = imageIds.flatMap { $0.string }
     
     return AddProductRequest(
+      userId: "User ID", // TODO: Extract user id from JWT token
       gameId: gameId,
       gameConsoleId: gameConsoleId,
       description: description,

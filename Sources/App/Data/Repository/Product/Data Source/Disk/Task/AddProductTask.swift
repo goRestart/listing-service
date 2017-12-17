@@ -40,7 +40,8 @@ struct AddProductTask {
       let product = ProductDiskModel(
         title: game.name,
         description: request.description,
-        priceId: try price.assertExists()
+        priceId: try price.assertExists(),
+        userId: request.userId
       )
       try product.makeQuery(connection).save()
       return product

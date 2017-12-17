@@ -7,17 +7,24 @@ final class ProductDiskModel: Model {
   var title: String
   var description: String
   var priceId: Identifier
+  var userId: String
   
-  init(title: String, description: String, priceId: Identifier) {
+  init(title: String,
+       description: String,
+       priceId: Identifier,
+       userId: String)
+  {
     self.title = title
     self.description = description
     self.priceId = priceId
+    self.userId = userId
   }
   
   init(row: Row) throws {
     title = try row.get(Keys.title)
     description = try row.get(Keys.description)
     priceId = try row.get(Keys.priceId)
+    userId = try row.get(Keys.userId)
   }
   
   func makeRow() throws -> Row {
@@ -25,6 +32,7 @@ final class ProductDiskModel: Model {
     try row.set(Keys.title, title)
     try row.set(Keys.description, description)
     try row.set(Keys.priceId, priceId)
+    try row.set(Keys.userId, userId)
     return row
   }
   
@@ -34,6 +42,7 @@ final class ProductDiskModel: Model {
     static let title = "title"
     static let description = "description"
     static let priceId = "price_id"
+    static let userId = "user_id"
   }
 }
 
@@ -62,9 +71,10 @@ extension ProductDiskModel: Preparation {
   static func prepare(_ database: Database) throws {
     try database.create(ProductDiskModel.self) { builder in
       builder.id()
-      builder.string(Keys.title, optional: false)
-      builder.text(Keys.description, optional: false)
-      builder.parent(PriceDiskModel.self, optional: false, foreignIdKey: Keys.priceId)
+      builder.string(Keys.title)
+      builder.text(Keys.description)
+      builder.parent(PriceDiskModel.self, foreignIdKey: Keys.priceId)
+      builder.string(Keys.userId)
     }
   }
   
