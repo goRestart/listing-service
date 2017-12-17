@@ -13,7 +13,7 @@ struct ProductMapper: Mappable {
   }
   
   func map(_ from: ProductDiskModel) throws -> Product {
-    let price = try priceMapper.map(from.price)
+    let price = try priceMapper.map(from.prices.all().last!)
     let images = try imageMapper.map(elements: from.images.all())
     
     return Product(
