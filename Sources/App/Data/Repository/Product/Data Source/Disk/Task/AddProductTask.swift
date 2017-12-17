@@ -31,24 +31,26 @@ struct AddProductTask {
     }
  
     let product: ProductDiskModel = try TransactionHandler.database!.transaction { connection in
-      let price = PriceDiskModel(
-        value: request.price.value,
-        locale: request.price.locale.currencyCode ?? defaultCurrencyCode
-      )
-      try price.makeQuery(connection).save()
-      
       let product = ProductDiskModel(
         title: game.name,
         description: request.description,
-        priceId: try price.assertExists(),
         userId: request.userId
       )
       try product.makeQuery(connection).save()
       return product
     }
+    try add(request.price, to: product)
     try add(images: request.imageIds, to: product)
-    
     return product
+  }
+  
+  private func add(_ price: Price, to product: ProductDiskModel) throws {
+    let priceDiskModel = PriceDiskModel(
+      value: price.value,
+      locale: price.locale.currencyCode ?? defaultCurrencyCode
+    )
+    try priceDiskModel.save()
+    try product.prices.add(priceDiskModel)
   }
   
   private func add(images: [String], to product: ProductDiskModel) throws {

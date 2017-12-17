@@ -27,7 +27,8 @@ extension Config {
       PriceDiskModel.self,
       ProductDiskModel.self,
       
-      Pivot<ProductDiskModel, ImageDiskModel>.self
+      Pivot<ProductDiskModel, ImageDiskModel>.self,
+      Pivot<ProductDiskModel, PriceDiskModel>.self
     ]
   }
 }
